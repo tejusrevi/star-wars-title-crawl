@@ -1,4 +1,5 @@
 import React from 'react';
+import Three from 'three';
 import logo from './logo.svg';
 import './App.css';
 
@@ -22,5 +23,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
