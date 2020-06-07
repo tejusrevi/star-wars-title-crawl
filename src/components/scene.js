@@ -1,10 +1,9 @@
 import * as Three from 'three';
 import * as OrbitControls from 'three-orbitcontrols';
 var geometry;
-var scene;
 
 function init() {
-	scene = new Three.Scene();
+	var scene = new Three.Scene();
 
 	// camera
 	var camera = new Three.PerspectiveCamera(
@@ -71,6 +70,7 @@ function init() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.shadowMap.enabled = true;
 	renderer.setClearColor('rgb(70, 20, 70)');
+
 
 	var controls = new OrbitControls( camera, renderer.domElement );
 
