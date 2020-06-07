@@ -2,6 +2,7 @@ import React from 'react';
 import Three from 'three';
 import logo from './logo.svg';
 import './App.css';
+import init from './components/scene.js'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+          {init()}
         </a>
       </header>
     </div>
