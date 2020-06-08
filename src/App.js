@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Three from 'three';
 import logo from './logo.svg';
 import './App.css';
 import init from './components/scene.js'
 
 function App() {
+  //const [count, setCount] = useState(1);
+  var state = {text:"jumbo"}
   return (
+    <div>
+      <input type="text" value={state.text} onChange={state.text = event.target.value}/>
+      {init(state.text)}
+    </div>
     /*
     <div className="App">
       <header className="App-header">
@@ -25,10 +31,6 @@ function App() {
       </header>
     </div>
     */
-
-    <div>
-      {init()}
-    </div>
   );
 }
 export default App;
