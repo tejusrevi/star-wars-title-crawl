@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Three from 'three';
 import * as OrbitControls from 'three-orbitcontrols';
 import * as dat from 'dat.gui'
@@ -12,12 +13,12 @@ var galaxyProps = {
 	particleDistance:100
 };
 var cameraProps = {
-	positionx:0.0090575,
-	positiony:-13.457231,
-	positionz:3.17002531,
-	rotationx: 1.2583043,
-	rotationy: 0.00064046,
-	rotationz: -0.0019823
+	positionx: 0.013714324047128142,
+	positiony:-11.924465558681977,
+	positionz:4.799862471866392,
+	rotationx: 1.1881175060833271,
+	rotationy: 0.0010669098934860991,
+	rotationz: -0.0026505547079106184
 };
 var lightProps = {
 	positionx: 1,
@@ -107,36 +108,28 @@ function getText(text){
       } );
       geometry.center();
 	  var material = new Three.MeshPhongMaterial({color  : '#f2ce0a'});
-      var mesh = new Three.Mesh( geometry, material );
-	  scene.add( mesh );
+	  var mesh = new Three.Mesh( geometry, material );
 
-	  const datGui  = new dat.GUI({ autoPlace: true });
-	
-      datGui.domElement.id = 'gui' 
-  
-	  var folder = datGui.addFolder(`Cube`);
-	  folder.add(mesh.position,"x",-100,100);
-	  folder.add(mesh.position,"y",-100,100);
-	  folder.add(mesh.position,"z",-100,100);
+	  mesh.name = 'text-geometry';
+	  scene.add( mesh );
     } );
 }
 
 function getCustomParticles(num){
 	var so = 1;
-	var colors = ['#c87831','#0c4485','#486b87']
 	for(var i =0; i<num; i++){
 		var geometry = new Three.SphereGeometry( 10, 12, 12 );
 		var radius = Math.random()*0.03 +0.02;
 		geometry.scale(radius, radius, radius);
 		var material = new Three.MeshPhongMaterial( {
-		color: colors[Math.floor(Math.random()*3)],
+		map: new Three.TextureLoader().load('/bump.jpg'),
 		shininess: 150,
 		emissive: '#a4a4a4',
-		emissiveIntensity:1
+		emissiveIntensity:3,
+		bumpMap: new Three.TextureLoader().load('/bump.jpg')
 		} );
 		var mesh = new Three.Mesh( geometry, material );
 		mesh.name = 'planet-'+so++;
-
 		mesh.position.x = Math.random() *97 - 46;
 		mesh.position.y = Math.random() *35 + 60;
 		mesh.position.z = Math.random() *(-60) + 20;
@@ -144,9 +137,9 @@ function getCustomParticles(num){
 		scene.add( mesh );
 	}
 }
-function init(text) {
+function Init(props) {
 	scene = new Three.Scene();
-	console.log(text)
+	var text  = props.text;
     getBackground();
 
 	getLights();
@@ -160,7 +153,6 @@ function init(text) {
     
 	// renderer
 	renderer = new Three.WebGLRenderer();
-	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.shadowMap.enabled = true;
 	renderer.setClearColor('rgb(0, 5, 20)');
 
@@ -170,15 +162,39 @@ function init(text) {
 	//controls.maxDistance = 20;
 	controls.maxAzimuthAngle = Math.PI/4;
 	controls.minAzimuthAngle = -Math.PI/4;
-
-	renderer.setSize(window.innerWidth, window.innerHeight);
 	
-
-	document.getElementById('webgl').appendChild(renderer.domElement);
-
-
+	var node = document.getElementById('webgl');
+	if (node.hasChildNodes()) node.removeChild(node.childNodes[0]);
+	node.appendChild(renderer.domElement);
+	
 	update(renderer, scene, camera, controls);
+
+	return null;
 }
+
+function update(renderer, scene, camera, controls) {
+	controls.update();
+	/*
+	const datGui  = new dat.GUI({ autoPlace: true });
+	
+    datGui.domElement.id = 'gui' 
+  
+	var folder = datGui.addFolder(`Cube`);
+	folder.add(galaxyProps,"particleCount",1,10000).listen();
+	*/
+	console.log(scene.getObjectByName('text-geometry'))
+	//scene.remove(scene.getObjectByName('text-geometry'))
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	planet();
+	renderer.render(scene, camera);
+	scene.getObjectByName('background').rotation.y = (scene.getObjectByName('background').rotation.y+0.0001);
+	
+	requestAnimationFrame(function() {
+		update(renderer, scene, camera, controls);
+	});
+	
+}
+
 function planetReset(mesh){
 	mesh.position.x = Math.random() *97 - 46;
     mesh.position.y = Math.random() *35 + 60;
@@ -241,27 +257,25 @@ function planet(){
 	planet6.position.x = planet6.position.x/1.01;
 	planet6.position.z = planet6.position.z/1.01;
 	if (planet6.position.y < -100) planet6 = planetReset(planet6);
-}
 
-function update(renderer, scene, camera, controls) {
-	controls.update();
-	/*
-	const datGui  = new dat.GUI({ autoPlace: true });
-	
-    datGui.domElement.id = 'gui' 
-  
-	var folder = datGui.addFolder(`Cube`);
-	folder.add(galaxyProps,"particleCount",1,10000).listen();
-	*/
-	planet();
-	renderer.render(scene, camera);
-	scene.getObjectByName('background').rotation.y = (scene.getObjectByName('background').rotation.y+0.0001);
-	
-	requestAnimationFrame(function() {
-		update(renderer, scene, camera, controls);
-	});
-	
+	var planet7 = scene.getObjectByName('planet-7');
+	planet7.scale.x = 0.05;
+	planet7.scale.y = 0.05;
+	planet7.scale.z = 0.05;
+
+	planet7.position.y = planet7.position.y-(0.4*3);
+	planet7.position.x = planet7.position.x/1.01;
+	planet7.position.z = planet7.position.z/1.01;
+	if (planet7.position.y < -100) planet7 = planetReset(planet7);
+
+
+	scene.getObjectByName('planet-8').material.emissiveIntensity = Math.random();
+	scene.getObjectByName('planet-9').material.emissiveIntensity = Math.random();
+	scene.getObjectByName('planet-10').material.emissiveIntensity = 0.3+Math.random()*2;
+	scene.getObjectByName('planet-11').material.emissiveIntensity = 0.3+Math.random()*2;
 }
 
 
-export default init;
+
+
+export default Init;

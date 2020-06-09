@@ -2,15 +2,19 @@ import React, { useState } from 'react';
 import Three from 'three';
 import logo from './logo.svg';
 import './App.css';
-import init from './components/scene.js'
+import Init from './components/scene.js'
+
 
 function App() {
-  //const [count, setCount] = useState(1);
-  var state = {text:"jumbo"}
+  const [count, setCount] = useState("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
   return (
     <div>
-      <input type="text" value={state.text} onChange={state.text = event.target.value}/>
-      {init(state.text)}
+      <form>
+      <input type="text" value={count} onChange = {e=>setCount(e.target.value)}/>
+      </form>
+      //{console.log(count)}
+      <Init text={count}/>
     </div>
     /*
     <div className="App">
