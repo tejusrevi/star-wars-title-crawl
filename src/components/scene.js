@@ -125,11 +125,15 @@ function getCustomParticles(num){
 		map: new Three.TextureLoader().load('/bump.jpg'),
 		shininess: 150,
 		emissive: '#a4a4a4',
-		emissiveIntensity:3,
+		emissiveIntensity:10,
 		bumpMap: new Three.TextureLoader().load('/bump.jpg')
 		} );
 		var mesh = new Three.Mesh( geometry, material );
 		mesh.name = 'planet-'+so++;
+		mesh.scale.x = 0.8;
+		mesh.scale.y = 0.8;
+		mesh.scale.z = 0.8;
+
 		mesh.position.x = Math.random() *97 - 46;
 		mesh.position.y = Math.random() *35 + 60;
 		mesh.position.z = Math.random() *(-60) + 20;
@@ -137,9 +141,9 @@ function getCustomParticles(num){
 		scene.add( mesh );
 	}
 }
-function Init(props) {
+function init() {
 	scene = new Three.Scene();
-	var text  = props.text;
+	//var text  = props.text;
     getBackground();
 
 	getLights();
@@ -149,8 +153,6 @@ function Init(props) {
 	getParticles();
 	getCustomParticles(15);
 	
-	getText(text);
-    
 	// renderer
 	renderer = new Three.WebGLRenderer();
 	renderer.shadowMap.enabled = true;
@@ -182,13 +184,12 @@ function update(renderer, scene, camera, controls) {
 	var folder = datGui.addFolder(`Cube`);
 	folder.add(galaxyProps,"particleCount",1,10000).listen();
 	*/
-	console.log(scene.getObjectByName('text-geometry'))
+	//console.log(scene.getObjectByName('text-geometry'))
 	//scene.remove(scene.getObjectByName('text-geometry'))
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	planet();
 	renderer.render(scene, camera);
 	scene.getObjectByName('background').rotation.y = (scene.getObjectByName('background').rotation.y+0.0001);
-	
 	requestAnimationFrame(function() {
 		update(renderer, scene, camera, controls);
 	});
@@ -219,11 +220,11 @@ function planet(){
 	
 	//Comets
 	var planet3 = scene.getObjectByName('planet-3');
-	planet3.scale.x = 0.1;
-	planet3.scale.y = 0.1;
-	planet3.scale.z = 0.1;
+	planet3.scale.x = 0.2;
+	planet3.scale.y = 0.2;
+	planet3.scale.z = 0.2;
 
-	planet3.position.y = planet3.position.y-(0.3*1.5);
+	planet3.position.y = planet3.position.y-(0.3*1.1);
 	planet3.position.x = planet3.position.x/1.01;
 	planet3.position.z = planet3.position.z/1.01;
 	if (planet3.position.y < -300) planet3 = planetReset(planet3);
@@ -268,14 +269,29 @@ function planet(){
 	planet7.position.z = planet7.position.z/1.01;
 	if (planet7.position.y < -100) planet7 = planetReset(planet7);
 
+	var planet8 = scene.getObjectByName('planet-8');
+	planet8.material.emissiveIntensity = (Math.random()<0.94)?0:50;
+	planet8.scale.x = 0.05;
+	planet8.scale.y = 0.05;
+	planet8.scale.z = 0.05;
 
-	scene.getObjectByName('planet-8').material.emissiveIntensity = Math.random();
-	scene.getObjectByName('planet-9').material.emissiveIntensity = Math.random();
+	var planet9 = scene.getObjectByName('planet-9');
+	planet9.material.emissiveIntensity = (Math.random()<0.94)?0:50;
+	planet9.scale.x = 0.05;
+	planet9.scale.y = 0.05;
+	planet9.scale.z = 0.05;
 	scene.getObjectByName('planet-10').material.emissiveIntensity = 0.3+Math.random()*2;
 	scene.getObjectByName('planet-11').material.emissiveIntensity = 0.3+Math.random()*2;
 }
 
+init();
 
+function ChangeText(props){
+	//console.log(props)
+	scene.remove(scene.getObjectByName('text-geometry'));
+	getText(props.text);
+	
+	return null;
+}
 
-
-export default Init;
+export default ChangeText;

@@ -1,3 +1,90 @@
+html,body{
+  min-height: 100%;
+}
+#container{
+  overflow: auto;
+  flex-direction: row;
+  min-height: 900px;
+}
+#webgl{
+  position: absolute;
+  z-index: 1;
+}
+
+#root{
+  position: absolute;
+  z-index: 2;
+  margin: auto;
+  width: 100%;
+  bottom: 0px;
+}
+
+#input-container{
+  opacity: 0.9;
+  border-radius: 9px;
+  background-color: #101927;
+  width:70%;
+  margin: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 10px;
+  align-content: center;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#user-input{
+  background-color: #000000;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  border-radius: 9px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  width:80%;
+  min-height: min-content;
+  overflow: hidden;
+  resize: none;
+  border-width: 0px;
+  outline:0;
+  display: inline-block;
+}
+#submit{
+  margin: 5px;
+  border-radius: 50%;
+  background-color: #1b293d;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  outline:0;
+}
+#play{
+  top:0px;
+  margin: 5px;
+  border-radius: 50%;
+  border-width: 0px;
+  background-color: #1b293d;
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  outline:0;
+}
+#play-icon{
+  width: 25px;
+  height: 25px;
+}
+#button-container{
+  width: min-content;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.center{
+  margin: auto;
+}
 .App {
   text-align: center;
 }

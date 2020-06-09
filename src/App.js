@@ -2,19 +2,35 @@ import React, { useState } from 'react';
 import Three from 'three';
 import logo from './logo.svg';
 import './App.css';
-import Init from './components/scene.js'
+import ChangeText from './components/scene.js'
 
-
+var data = {
+  numOfChars:100, //100 characters per line
+  placeholder: '     A long time ago in \n a galaxy far,far away....'
+}
+function getInput(){
+  var arr = [];
+  var node = document.getElementById('user-input')//.textContent;
+  if (node.childNodes.length>0){
+    node.childNodes.forEach(e=>{
+      var padding = "  ".repeat((data.numOfChars-e.textContent.length)/2);
+      
+      arr.push(padding+e.textContent+padding)
+    })
+  }
+  console.log(arr)
+  return arr.join('\n');
+}
 function App() {
-  const [count, setCount] = useState("Teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-
+  const [userInput, setUserInput] = useState(data.placeholder);
   return (
-    <div>
-      <form>
-      <input type="text" value={count} onChange = {e=>setCount(e.target.value)}/>
-      </form>
-      //{console.log(count)}
-      <Init text={count}/>
+    <div id ="input-container">
+      <div contentEditable="true" id ='user-input' spellCheck ="false">{data.placeholder}</div>
+      <div id="button-container">
+        <input id='submit' type='image' src='./tick.png' onClick = {e=>{setUserInput(getInput())}}/>
+        <button id="play" class="btn"><img id="play-icon" src="./play.png"></img></button>
+      </div>
+      <ChangeText text={userInput}/>
     </div>
     /*
     <div className="App">
