@@ -6,31 +6,38 @@ import ChangeText from './components/scene.js'
 
 var data = {
   numOfChars:100, //100 characters per line
-  placeholder: '     A long time ago in \n a galaxy far,far away....'
+  placeholder: "It is a dark time for the Rebellion."
 }
-function getInput(){
+
+function getInput(node){
   var arr = [];
-  var node = document.getElementById('user-input')//.textContent;
-  if (node.childNodes.length>0){
+  if (node.childNodes.length<data.numOfChars){
     node.childNodes.forEach(e=>{
       var padding = "  ".repeat((data.numOfChars-e.textContent.length)/2);
-      
       arr.push(padding+e.textContent+padding)
     })
   }
   console.log(arr)
   return arr.join('\n');
 }
+function handleInput(bool){
+  if (bool) return false;
+  return true;
+}
 function App() {
   const [userInput, setUserInput] = useState(data.placeholder);
+  const [isPlay, setIsPlay] = useState(false);
   return (
+    <div>
     <div id ="input-container">
       <div contentEditable="true" id ='user-input' spellCheck ="false">{data.placeholder}</div>
       <div id="button-container">
-        <input id='submit' type='image' src='./tick.png' onClick = {e=>{setUserInput(getInput())}}/>
-        <button id="play" class="btn"><img id="play-icon" src="./play.png"></img></button>
+        <input id='submit' type='image' src='./tick.png' onClick = {e=>{setUserInput(getInput(document.getElementById('user-input')))}}/>
+        <button id="play" className="btn" onClick = {e=>setIsPlay(handleInput(isPlay))}><img id="play-icon" src="./play.png"></img></button>
       </div>
-      <ChangeText text={userInput}/>
+      <ChangeText text={userInput} play={isPlay}/>
+      </div>
+      <button id="camera-reset">Camera</button>
     </div>
     /*
     <div className="App">

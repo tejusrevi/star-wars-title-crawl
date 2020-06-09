@@ -98,7 +98,7 @@ function getText(text){
     loader.load( 'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function ( font ) {
         var geometry = new Three.TextGeometry( text, {
 		font: font,
-        size: 1,
+        size: 0.7,
         height: 0.01,
         curveSegments: 6,
         bevelEnabled: true,
@@ -284,13 +284,23 @@ function planet(){
 	scene.getObjectByName('planet-11').material.emissiveIntensity = 0.3+Math.random()*2;
 }
 
+var interval;
+function doAnimation(){
+	scene.getObjectByName('text-geometry').position.y = -9;
+	interval = setInterval(e=>{scene.getObjectByName('text-geometry').position.y = scene.getObjectByName('text-geometry').position.y+0.03;},50)
+
+}
 init();
 
 function ChangeText(props){
 	//console.log(props)
-	scene.remove(scene.getObjectByName('text-geometry'));
-	getText(props.text);
 	
+	if(props.play) doAnimation();
+	else{
+		clearInterval(interval);
+		scene.remove(scene.getObjectByName('text-geometry'));
+	    getText(props.text);
+	}
 	return null;
 }
 

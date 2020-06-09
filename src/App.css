@@ -4,7 +4,7 @@ html,body{
 #container{
   overflow: auto;
   flex-direction: row;
-  min-height: 900px;
+  min-height: 100%;
 }
 #webgl{
   position: absolute;
@@ -22,8 +22,8 @@ html,body{
 #input-container{
   opacity: 0.9;
   border-radius: 9px;
-  background-color: #101927;
-  width:70%;
+  background-color: #1d1d1d;
+  width:60%;
   margin: auto;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -56,10 +56,10 @@ html,body{
 #submit{
   margin: 5px;
   border-radius: 50%;
-  background-color: #1b293d;
+  background-color: #000000;
   padding: 10px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   outline:0;
 }
 #play{
@@ -67,20 +67,25 @@ html,body{
   margin: 5px;
   border-radius: 50%;
   border-width: 0px;
-  background-color: #1b293d;
+  background-color: #000000;
   padding: 10px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   outline:0;
 }
 #play-icon{
-  width: 25px;
-  height: 25px;
+  padding-top: 3px;
+  padding-left: 4px;
+  width: 15px;
+  height: 15px;
 }
 #button-container{
-  width: min-content;
+  flex-direction: row;
   padding-left: 10px;
   padding-right: 10px;
+}
+#camera-reset{
+  color:white;
 }
 .center{
   margin: auto;
