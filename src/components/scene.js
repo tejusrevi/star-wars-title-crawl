@@ -290,11 +290,37 @@ function doAnimation(){
 	interval = setInterval(e=>{scene.getObjectByName('text-geometry').position.y = scene.getObjectByName('text-geometry').position.y+0.03;},50)
 
 }
+
+var cameraInterval;
+function resetCamera(){
+	if(Math.abs(camera.position.x - cameraProps.positionx) <1){
+		console.log("clearing interval")
+		clearInterval(cameraInterval);
+		camera.position.x = cameraProps.positionx;
+		camera.position.y = cameraProps.positiony;
+		camera.position.z = cameraProps.positionz;
+		return;
+	}
+	if(camera.position.x>cameraProps.positionx) camera.position.x = camera.position.x -0.4;
+	else camera.position.x = camera.position.x + 0.4;
+
+	if(camera.position.y>cameraProps.positiony) camera.position.y = camera.position.y -1;
+	else camera.position.y = camera.position.y + 1;
+
+	if(camera.position.z>cameraProps.positionz) camera.position.z = camera.position.z -1;
+	else camera.position.z = camera.position.z + 1;
+}
 init();
 
 function ChangeText(props){
-	//console.log(props)
-	
+	console.log(props)
+	if(props.reset) {
+		clearInterval(interval);
+		cameraInterval = setInterval(e=>resetCamera(),100)
+		//resetCamera();
+		props.resetConfirm(false);
+		return null;
+	}
 	if(props.play) doAnimation();
 	else{
 		clearInterval(interval);
