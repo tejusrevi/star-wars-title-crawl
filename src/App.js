@@ -12,15 +12,6 @@ var data = {
 }
 
 function getInput(node){
-  /*
-  var arr = [];
-  node.value.split('\n').forEach(e=>{
-    var padding = "  ".repeat((data.numOfChars-e.length)/3);
-    arr.push(padding+e+padding);
-  })
-  console.log(arr.forEach(e=>console.log(e.length)))
-  return arr.join("\n");
-  */
  return node.value;
 }
 
@@ -37,6 +28,7 @@ function App() {
   const [userInput, setUserInput] = useState(data.placeholder);
   const [isPlay, setIsPlay] = useState(false);
   const [isReset, setIsReset] = useState(true);
+
   return (
     <div id ='main-container'>
       <div id="credit"><code><div id="name">Made by Tejus Revi</div><div id="tools">Using React & ThreeJS</div></code></div>
@@ -53,7 +45,10 @@ function App() {
       <textarea id ='user-input' spellCheck ="false">{data.placeholder}</textarea>
       <div id="button-container">
         <div id="button">
-        <button id='submit' onClick ={e=>setUserInput(getInput(document.getElementById('user-input')))}><img id="tick-icon" src="./tick.png"></img></button>
+        <button id='submit' onClick ={e=>{
+          setUserInput(getInput(document.getElementById('user-input')));
+          }
+          }><img id="tick-icon" src="./tick.png"></img></button>
         <div id="render-text">Render</div>
         </div>
         <div id="button">
@@ -64,6 +59,14 @@ function App() {
             document.getElementById("audio").pause();
             document.getElementById("audio").currentTime=0;
           }
+          if(isPlay){ 
+            document.getElementById('submit').disabled = false;
+            document.getElementById('submit').classList.remove('not-allowed');
+          }
+          else {
+            document.getElementById('submit').disabled = true;
+            document.getElementById('submit').classList.add('not-allowed');
+          }
           }}><img id="play-icon" src="./play.png"></img></button>
         <div id="play-text">Play</div>
         </div>
@@ -73,25 +76,6 @@ function App() {
       </div>
       
     </div>
-    /*
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-          {init()}
-        </a>
-      </header>
-    </div>
-    */
   );
 }
 export default App;

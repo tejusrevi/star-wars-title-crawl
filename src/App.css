@@ -204,6 +204,9 @@ body::-webkit-scrollbar {
 button:hover{
   animation: enlarge both 1s linear;
 }
+.not-allowed{
+  cursor: not-allowed;
+}
 .center{
   margin: auto;
 }
