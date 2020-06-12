@@ -37,7 +37,6 @@ body::-webkit-scrollbar {
   bottom: 0px;
   margin: auto;
   margin-top: 5px;
-
   opacity: 0.9;
   border-radius: 9px;
   background-color: #1d1d1d;
@@ -144,22 +143,43 @@ body::-webkit-scrollbar {
   width: max-content;
   margin: auto;
 }
+#instruction{
+  width: max-content;
+  margin: auto;
+}
 #tools{
   font-size: 10px;
   width: max-content;
   margin: auto;
 }
 #camera-reset{
-  position: fixed;
-  top:0px;
   margin: 10px;
   background-color: #111111;
   border-radius: 10px;
   border-width: 0px;
   padding: 10px;
   outline: 0;
-  color:white;
-  right: 2%;
+  color:#adadad;
+  width: min-content;
+}
+#top-controls{
+  top:0px;
+  right: 0px;
+  flex-direction: column;
+  position: fixed;
+  width: 10%;
+  height: min-content;
+  margin: 10px;
+  width: min-content;
+}
+
+#hide-controls{
+  background-color: #111111;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 10px;
+  outline: 0;
+  color:#adadad;
 }
 #render-text,#play-text{
   font-size: small;
@@ -188,7 +208,7 @@ body::-webkit-scrollbar {
   padding: 6px;
   font-size: 12px;
 }
-@keyframes enlarge{
+@keyframes whiten{
   0%{
     color: #b3b3b3;
     background-color: #000000;
@@ -202,8 +222,21 @@ body::-webkit-scrollbar {
 }
 
 button:hover{
-  animation: enlarge both 1s linear;
+  animation: whiten both 1s linear;
 }
+
+.fast-fade{
+  animation: fastfade both 1s linear
+}
+
+@keyframes fastfade{
+  0%{
+    opacity: 0.9;
+  }100%{
+    opacity: 0;
+  }
+}
+
 .not-allowed{
   cursor: not-allowed;
 }

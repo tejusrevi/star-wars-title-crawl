@@ -9,7 +9,6 @@ var scene
 var camera
 var renderer;
 
-
 function getBackground(){
 	var geometry = new Three.SphereGeometry( 100, 60, 40 );
 	geometry.scale( - 1, 1, 1 );
@@ -148,7 +147,8 @@ function init() {
 	//controls.maxDistance = 20;
 	controls.maxAzimuthAngle = Math.PI/4;
 	controls.minAzimuthAngle = -Math.PI/4;
-	
+	controls.enablePan = false;
+
 	var node = document.getElementById('webgl');
 	if (node.hasChildNodes()) node.removeChild(node.childNodes[0]);
 	node.appendChild(renderer.domElement);
@@ -160,6 +160,7 @@ function init() {
 
 function update(renderer, scene, camera, controls) {
 	controls.update();
+	console.log(camera)
 	/*
 	const datGui  = new dat.GUI({ autoPlace: true });
 	
@@ -196,8 +197,7 @@ init();
 function ChangeText(props){
 	if(props.reset) {
 		clearInterval(interval);
-		cameraInterval = setInterval(e=>resetCamera(camera, cameraInterval),70)
-		//resetCamera();
+		resetCamera(camera);
 		props.resetConfirm(false);
 		return null;
 	}
