@@ -5,12 +5,12 @@ var galaxyProps = {
 	particleDistance:100
 };
 var cameraProps = {
-	positionx: 0.01995338350223537,
-	positiony:-10.791782548246918,
-	positionz:6.983464611892008,
-	rotationx: 1.1881175060833271,
-	rotationy: 0.0010669098934860991,
-	rotationz: -0.0026505547079106184
+	positionx: 0.0199533835022353,
+	positiony:-10.79178254824691,
+	positionz:6.98346461189200,
+	rotationx: 1.188117506083327,
+	rotationy: 0.001066909893486091,
+	rotationz: -0.002650554707910618
 };
 var lightProps = {
 	positionx: 1,
