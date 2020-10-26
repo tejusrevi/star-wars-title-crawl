@@ -1,10 +1,13 @@
- Demo at [star-wars-title.web.app](https://star-wars-title.web.app/])  
-    
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Build by Tejus Revi using ReactJS
+
+This project was inspired by a [Star Wars themed episode of Family Guy](https://youtu.be/lMYHdInx_eE?t=27). With this project, you can recreate the iconic title crawl from Star Wars and replace it with your own text. 
+
+Head over to [star-wars-title.web.app](https://star-wars-title.web.app/]) and try it out!
+
+![Demo](https://github.com/tejusrevi/star-wars-title-crawl/blob/master/src/ezgif.com-video-to-gif%20(1).gif)
 
 
 In the project directory, you can run:
-
 ### `npm start`
 
 Runs the app in the development mode.<br />
